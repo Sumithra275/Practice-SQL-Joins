@@ -1,0 +1,52 @@
+1. Write a query to display all the orders from the orders table issues by salesman "paul adam"
+
+SELECT* FROM orders WHERE salesman_id = (SELECT salesman_id FROM salesman WHERE name= 'paul adam';
+
+2. Write a query to display all the orders for the salesman who belongs to the city London.
+
+SELECT* FROM orders WHERE salesman_id = (SELECT salesman_id FROM salesman WHERE City= 'London';
+
+3. Write a query to find all the orders issues against the salesman who may work for customer whose ID is 3007.
+
+SELECT* FROM orders WHERE salesman_id = (SELECT salesman_id FROM salesman WHERE Customer_id = '3007';
+
+4. Write a query to display all the orders which values are greater than the average order value for 10th October 2012.
+
+SELECT *FROM orders WHERE purch_amt > (SELECT AVG(purch_amt) FROM orders WHERE ord_date = '2012-10-10');
+
+5. Write a query to find all orders attributed to a salesman in New York.
+
+SELECT * FROM orders WHERE salesman_id IN (SELECT salesman_id FROM salesman WHERE city = 'New York'
+
+6. Write a query to display the commission of all the salesmen servicing customers in Paris.
+
+SELECT commission FROM salesman WHERE salesman_id IN (SELECT salesman_id FROM customer WHERE city = 'Paris');
+
+7. Write a query to display all the customers whose id is 2001 bellow the salesman ID of Mc Lyon
+
+SELECT * FROM customer WHERE customer_id = (SELECT salesman_id - 2001 FROM salesman WHERE name = 'Mc Lyon');
+
+8. Write a query to count the customers with grades above New York's average.
+
+SELECT COUNT(*) FROM customer WHERE grade > (SELECT AVG(grade) FROM customer WHERE city = 'New York');
+
+
+9. Write a query to display all customers with orders on October 5, 2012
+/* Note: These set of exercises focus on subqueries, so I wrote the query below.  The 2nd query also works and displays order information as well. 
+
+SELECT * FROM custome WHERE customer_id IN (SELECT customer_id FROM orders WHERE ord_date = '2012-10-05'); OR
+
+SELECT * FROM customer a, orders b WHERE a.customer_id = b.customer_id AND b.ord_date = '2012-10-05';
+
+
+10. Write a query to display all the customers with orders issued on date 17th August, 2012. 
+/* Note: These set of exercises focus on subqueries, so I wrote the query below.  The 2nd query also works and displays order information as well. 
+
+SELECT * FROM customer WHERE customer_id IN (SELECT customer_id FROM orders WHERE ord_date = '2012-08-17');OR
+
+SELECT b.*,a.cust_name FROM customer a, orders b WHERE a.customer_id = b.customer_id AND b.ord_date = '2012-08-17';
+
+
+
+
+
